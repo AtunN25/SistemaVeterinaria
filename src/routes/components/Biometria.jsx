@@ -1,33 +1,31 @@
-import React from "react";
+import React,{useContext} from "react";
+
 import { useNavigate } from "react-router-dom";
-
-import FemaleForm from '../components/FemaleForm'
-
-
 
 const today = new Date();
 today.setDate(today.getDate() - 1); // Restar un día
 const formattedDate = today.toISOString().split("T")[0];
 
-function ConcurrentForm() {
-  
+const sexo = "macho";
+
+
+function Biometria() {
   const navigate = useNavigate();
+ 
+
   const handleButtonClick = (path) => {
     navigate(path); // Redirige a la ruta del dashboard
   };
-
-  const sexo = "macho";
-
   return (
+    
     <div className="p-4 rounded-sm">
-      <h2 className="text-xl font-bold leading-7 text-gray-900">
-        Formulario Concurrente
-      </h2>
-
+      <h2 className="text-xl font-bold leading-7 text-gray-900">Biometria</h2>
+    
       <form>
         <label className="block text-sm font-medium leading-6 text-gray-900">
           Fecha de Registro
         </label>
+
         <div className="relative max-w-sm">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
             <svg
@@ -47,22 +45,6 @@ function ConcurrentForm() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Select date"
           ></input>
-        </div>
-        {/* Condición Corporal */}
-        <div className="mt-2">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Condición Corporal
-          </label>
-          <select
-            id="bodyCondition"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
         </div>
 
         <div className="mt-2">
@@ -99,7 +81,29 @@ function ConcurrentForm() {
           />
         </div>
 
-        <h2 className="text-lg font-bold leading-7 text-gray-900">Biometria</h2>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+            Peso
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="first-name"
+              id="first-name"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500  "
+            ></input>
+          </div>
+
+        <div className="mt-2">
+          <label className="block text-sm font-medium leading-6 text-gray-900">
+            Condición Corporal
+          </label>
+          <input
+            type="decimal"
+            step="0.1"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Ingrese altura de grupa"
+          />
+        </div>
 
         {/* Altura de Grupa */}
         <div className="mt-2">
@@ -149,11 +153,10 @@ function ConcurrentForm() {
             placeholder="Ingrese orejas"
           />
         </div>
-
         {/* Longitud del Cuerpo */}
         <div className="mt-2">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            Longitud del Cuerpo
+            Largo de cuerpo
           </label>
           <input
             type="number"
@@ -204,7 +207,7 @@ function ConcurrentForm() {
         {/* Longitud del Cuerpo */}
         <div className="mt-2">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            Circunferencia de cuerpo
+            Amplitud del pecho
           </label>
           <input
             type="number"
@@ -214,67 +217,38 @@ function ConcurrentForm() {
           />
         </div>
 
-        {/* Perímetro Torácico */}
         <div className="mt-2">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            Perímetro Torácico
+            Aplomo Anterior
           </label>
-          <input
-            type="number"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Ingrese perímetro torácico"
-          />
+          <div className="mt-2">
+            <select
+              name="colorSelect"
+              id="colorSelect"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value="normal">Normal</option>
+              <option value="cerrado">Cerrado</option>
+            </select>
+          </div>
         </div>
 
-        {/* Isquiones */}
         <div className="mt-2">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            Isquiones
+            Aplomo Posterior
           </label>
-          <input
-            type="number"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Ingrese isquiones"
-          />
+          <div className="mt-2">
+            <select
+              name="colorSelect"
+              id="colorSelect"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value="normal">Normal</option>
+              <option value="cerrado">Patizambo</option>
+            </select>
+          </div>
         </div>
 
-        {/* Comisura Vulvar */}
-        <div className="mt-2">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Comisura Vulvar
-          </label>
-          <input
-            type="number"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Ingrese comisura vulvar"
-          />
-        </div>
-
-        {/* Tren Anterior */}
-        <div className="mt-2">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Tren Anterior
-          </label>
-          <input
-            type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Ingrese tren anterior"
-          />
-        </div>
-
-        {/* Tren Posterior */}
-        <div className="mt-2">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Tren Posterior
-          </label>
-          <input
-            type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Ingrese tren posterior"
-          />
-        </div>
-
-        {/* Observaciones */}
         <div className="mt-2">
           <label className="block text-sm font-medium leading-6 text-gray-900">
             Observaciones
@@ -285,112 +259,49 @@ function ConcurrentForm() {
           />
         </div>
 
-        <h2 className="text-lg font-bold leading-7 text-gray-900">Clasificacion de fibra</h2>
-
-        <label className="block text-sm font-medium leading-6 text-gray-900">
-              Densidad
+        {sexo === "hembra" ? (
+          <p></p>
+        ) : (
+          <div>
+            <h2 className="text-lg font-bold leading-7 text-gray-900">
+              Medicion testicular
+            </h2>
+            <label className="block text-sm font-medium leading-6 text-gray-900">
+              Testiculo derecho - Ancho
             </label>
-            <select
-              id="animalType"
-              name="animalType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-                
-              <option value="baja">baja</option>
-              <option value="media">media</option>
-              <option value="buena">buena</option>
-              <option value="alta">alta</option>
-            </select>
+            <input
+              type="decimal"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="ej:2.6 "
+            />
+
+          <label className="block text-sm font-medium leading-6 text-gray-900">
+              Testiculo derecho - Largo
+            </label>
+            <input
+              type="decimal"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="ej:2.6 "
+            />
 
             <label className="block text-sm font-medium leading-6 text-gray-900">
-              Defincion
+              Testiculo izquierdo - Ancho
             </label>
-            <select
-              id="animalType"
-              name="animalType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-                
-              <option value="baja">baja</option>
-              <option value="media">media</option>
-              <option value="buena">buena</option>
-              <option value="alta">alta</option>
-            </select>
-
-
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Calce
+            <input
+              type="decimal"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="ej:2.6"
+            />
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+              Testiculo izquierdo - Largo
             </label>
-            <select
-              id="animalType"
-              name="animalType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-                
-              <option value="baja">baja</option>
-              <option value="media">media</option>
-              <option value="buena">buena</option>
-              <option value="alta">alta</option>
-            </select>
-
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Uniformidad
-            </label>
-            <select
-              id="animalType"
-              name="animalType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-                
-              <option value="baja">baja</option>
-              <option value="media">media</option>
-              <option value="buena">buena</option>
-              <option value="alta">alta</option>
-            </select>
-
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Tuco
-            </label>
-            <select
-              id="animalType"
-              name="animalType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-                
-              <option value="baja">baja</option>
-              <option value="media">media</option>
-              <option value="no">no</option>
-            </select>
-
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Color
-            </label>
-            <select
-              id="animalType"
-              name="animalType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-                
-              <option value="cafe">cafe</option>
-              <option value="blanco lechoso">blanco lechoso</option>
-              <option value="blanco con mancha">blanco con mancha</option>
-     
-            </select>
-        
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Clase
-            </label>
-            <select
-              id="animalType"
-              name="animalType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-                
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-            </select>
-
+            <input
+              type="decimal"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="ej:2.6"
+            />
+          </div>
+        )}
 
         <div className="mt-4">
           <button
@@ -403,6 +314,8 @@ function ConcurrentForm() {
       </form>
     </div>
   );
+  
 }
 
-export default ConcurrentForm;
+
+export default Biometria;

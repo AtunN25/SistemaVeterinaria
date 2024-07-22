@@ -1,60 +1,92 @@
-import React from "react";
+import React, { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-const validAretes = ["M10-002", "M10-005", "M10-007", "M10-010", "M10-012"];
+const validAretes = [
+  {
+    arete: "H-9",
+    gender: "M",
+  },
+  {
+    arete: "HC-09",
+    gender: "M",
+  },
+  {
+    arete: "H-24",
+    gender: "F",
+  },
+  {
+    arete: "S-01",
+    gender: "F",
+  },
+];
 
 function Dashboard() {
   const navigate = useNavigate();
+
   const handleButtonClick = (path) => {
-    navigate(path); // Redirige a la ruta del dashboard
-  };
+    if (path === "/newregister") {
+      navigate(path);
+    } else {
+      const arete = prompt("Ingrese el código de arete de la llama:");
 
-  const handleConcurrentForm = (event) => {
-    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-    const arete = prompt("Ingrese el código de arete de la llama:");
+      if (arete) {
+        const animal = validAretes.find((a) => a.arete === arete);
 
-    if (arete) {
-      if (validAretes.includes(arete)) {
-        navigate("/concurrentform");
-      } else {
-        alert("Código de arete inválido. Por favor, vuelva a intentarlo.");
+        if (animal) {
+          if (
+            (path === "/muestras" || path === "/capacidadreproductiva") &&
+            animal.gender !== "M"
+          ) {
+            alert("!ERROR! El formulario es solo para animales Machos.");
+          } else if (path === "/femaleform" && animal.gender !== "F") {
+            alert("!ERROR! El formulario es solo para animales Hembras.");
+          } else {
+         
+            navigate(path);
+          }
+        } else {
+          alert(
+            "!ERROR! Código de arete no se encuentra registrado. Por favor, vuelva a intentarlo."
+          );
+        }
       }
     }
   };
 
   return (
     <div>
-      <div className="bg-gray-800  justify-start p-2">
-        <div className="items-center justify-center space-x-3">
-          <div className=" bg-gray-800  text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5">
+      <div className="bg-gray-800 flex justify-between p-2">
+        <div className="flex items-center">
+          <div className="bg-gray-800 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5">
             <img
               width="30"
               height="30"
               src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/external-llama-animal-body-icongeek26-flat-icongeek26.png"
               alt="external-llama-animal-body-icongeek26-flat-icongeek26"
             />
-            <div className=" px-3 text-left rtl:text-right">
+            <div className="px-3 text-left rtl:text-right">
+      
               <div className="mb-1 text-xs">Cantidad de Animales</div>
               <div className="-mt-1 font-sans text-sm font-semibold">27</div>
             </div>
           </div>
-          <button className=" bg-green-900  text-white rounded-lg inline-flex items-center justify-center px-2 py-2.5">
-            <img
-              width="30"
-              height="30"
-              src="https://img.icons8.com/color/48/ms-excel.png"
-              alt="ms-excel"
-            />
-            <div className="text-left rtl:text-right px-2">
-              <div className="mb-1 text-xs">exportar Sabana</div>
-            </div>
-          </button>
         </div>
+        <button className="bg-green-900 text-white rounded-lg inline-flex items-center justify-center px-2 py-2.5">
+          <img
+            width="30"
+            height="30"
+            src="https://img.icons8.com/color/48/ms-excel.png"
+            alt="ms-excel"
+          />
+          <div className="text-left rtl:text-right px-2">
+            <div className="mb-1 text-xs">exportar Sabana</div>
+          </div>
+        </button>
       </div>
       <div className="rounded overflow-hidden shadow-lg justify-start p-2">
-        <div className="items-center justify-center space-x-3 flex ">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           <button
-            className=" bg-gray-800  text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5"
+            className="bg-gray-800 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5"
             onClick={() => handleButtonClick("/newregister")}
           >
             <img
@@ -64,12 +96,13 @@ function Dashboard() {
               alt="external-llama-animal-head-icongeek26-outline-gradient-icongeek26"
             />
             <div className="text-left rtl:text-right">
-              <div className="mb-1 text-xs">+ Nuevo Animal</div>
+              <div className="mb-1 text-xs ">+Nuevo Animal</div>
             </div>
           </button>
+
           <button
-            className=" sm:w-auto bg-gray-800  text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 "
-            onClick={handleConcurrentForm}
+            className="sm:w-auto bg-gray-800 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5"
+            onClick={() => handleButtonClick("/biometria")}
           >
             <img
               width="30"
@@ -78,11 +111,72 @@ function Dashboard() {
               alt="bookmark"
             />
             <div className="text-left rtl:text-right">
-              <div className="mb-1 text-xs">+ Nuevo Informe</div>
+              <div className="mb-1 text-xs">Biometria</div>
+            </div>
+          </button>
+
+          <button
+            className="sm:w-auto bg-gray-800 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5"
+            onClick={() => handleButtonClick("/muestras")}
+          >
+            <img
+              width="30"
+              height="30"
+              src="https://img.icons8.com/nolan/64/bookmark.png"
+              alt="bookmark"
+            />
+            <div className="text-left rtl:text-right">
+              <div className="mb-1 text-xs">Muestras de Semen</div>
+            </div>
+          </button>
+
+          <button
+            className="sm:w-auto bg-gray-800 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5"
+            onClick={() => handleButtonClick("/clasificacionfibra")}
+          >
+            <img
+              width="30"
+              height="30"
+              src="https://img.icons8.com/nolan/64/bookmark.png"
+              alt="bookmark"
+            />
+            <div className="text-left rtl:text-right">
+              <div className="mb-1 text-xs">Clasificacion de Fibra</div>
+            </div>
+          </button>
+
+          <button
+            className="sm:w-auto bg-gray-800 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5"
+            onClick={() => handleButtonClick("/capacidadreproductiva")}
+          >
+            <img
+              width="30"
+              height="30"
+              src="https://img.icons8.com/nolan/64/bookmark.png"
+              alt="bookmark"
+            />
+            <div className="text-left rtl:text-right">
+              <div className="mb-1 text-xs">Capacidad reproductiva</div>
+            </div>
+          </button>
+
+          <button
+            className="sm:w-auto bg-gray-800 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5"
+            onClick={() => handleButtonClick("/femaleform")}
+          >
+            <img
+              width="30"
+              height="30"
+              src="https://img.icons8.com/nolan/64/bookmark.png"
+              alt="bookmark"
+            />
+            <div className="text-left rtl:text-right">
+              <div className="mb-1 text-xs">Registro Hembras</div>
             </div>
           </button>
         </div>
       </div>
+
       <div className="flex rounded overflow-hidden shadow-lg items-center p-2 space-x-2">
         <button
           type="button"
@@ -95,13 +189,6 @@ function Dashboard() {
           className="focus:outline-none text-white bg-cyan-800  hover:bg-cyan-400  font-medium rounded-lg text-sm px-5 py-2.5 mb-2 "
         >
           Llamas
-        </button>
-
-        <button
-          type="button"
-          className="focus:outline-none text-white bg-cyan-800  hover:bg-cyan-400 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 "
-        >
-          Huanacos
         </button>
       </div>
       <div className="">
@@ -154,9 +241,7 @@ function Dashboard() {
                   15/04/2022
                 </td>
                 <td className="px-6 py-4">0</td>
-                <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                  
-                </td>
+                <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800"></td>
               </tr>
               <tr className="border-b border-gray-200 ">
                 <th

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function NewRegister() {
-    const navigate = useNavigate();
-    const handleButtonClick = (path) => {
-        navigate(path); // Redirige a la ruta del dashboard
-      };
+  const navigate = useNavigate();
+  const handleButtonClick = (path) => {
+    navigate(path); // Redirige a la ruta del dashboard
+  };
 
   // Estado para el tipo de animal seleccionado
   const [animalType, setAnimalType] = useState("");
-  const [birthType, setBirthType] = useState("natural");
+  const [birthType, setBirthType] = useState("comprada");
 
   const today = new Date();
   today.setDate(today.getDate() - 1); // Restar un día
@@ -18,7 +18,6 @@ function NewRegister() {
   const handleAnimalTypeChange = (event) => {
     setAnimalType(event.target.value);
   };
-  
 
   const handleBirthTypeChange = (event) => {
     setBirthType(event.target.value);
@@ -31,41 +30,6 @@ function NewRegister() {
       </h2>
       <form action="">
         <div className="col-span-3">
-          
-          <div className="mt-2">
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Tipo de Animal
-            </label>
-            <select
-              id="animalType"
-              onChange={handleAnimalTypeChange}
-              name="animalType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-                
-              <option value="llama">Llama</option>
-              <option value="alpaca">Alpaca</option>
-            </select>
-          </div>
-        </div>
-      
-        <div className="mt-2">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Tipo de Nacimiento
-          </label>
-          <select
-            id="animalType"
-            onChange={handleBirthTypeChange}
-            name="animalType"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            
-            <option value="natural">Natural</option>
-            <option value="artificial">Artifical</option>
-          </select>
-        </div>
-
-        <div className="sm:col-span-3">
           <label className="block text-sm font-medium leading-6 text-gray-900">
             Arete
           </label>
@@ -77,6 +41,39 @@ function NewRegister() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500  "
             ></input>
           </div>
+
+          <div className="mt-2">
+            <label className="block text-sm font-medium leading-6 text-gray-900">
+              Tipo de Animal
+            </label>
+            <select
+              id="animalType"
+              onChange={handleAnimalTypeChange}
+              name="animalType"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value="llama">Llama</option>
+              <option value="alpaca">Alpaca</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="mt-2">
+          <label className="block text-sm font-medium leading-6 text-gray-900">
+            Tipo de Ingreso
+          </label>
+          <select
+            id="animalType"
+            onChange={handleBirthTypeChange}
+            name="animalType"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <option value="comprada">Comprada</option>
+            <option value="nacida">Nacida</option>
+          </select>
+        </div>
+
+        <div className="sm:col-span-3">
           <div className="mt-2">
             <label className="block text-sm font-medium leading-6 text-gray-900">
               Sexo
@@ -86,10 +83,21 @@ function NewRegister() {
               name="animalType"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
-              
               <option value="H">hembra</option>
               <option value="M">macho</option>
             </select>
+          </div>
+
+          <label className="block text-sm font-medium leading-6 text-gray-900">
+            Peso
+          </label>
+          <div className="mt-2">
+            <input
+              type="decimal"
+              name="first-name"
+              id="first-name"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500  "
+            ></input>
           </div>
 
           <div className="mt-2">
@@ -107,7 +115,6 @@ function NewRegister() {
                 <option value="R2llama">R2llama</option>
               </select>
             ) : (
-            
               <select
                 id="razaAlpaca"
                 name="raza"
@@ -119,9 +126,49 @@ function NewRegister() {
             )}
           </div>
 
-          
+         
+        </div>
 
-          <label className="block text-sm font-medium leading-6 text-gray-900">
+        <div className="mt-2">
+          {birthType === "comprada" ? (
+            <div>
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Edad
+              </label>
+              <div className="mt-2">
+                <input
+                  type="number"
+                  name="first-name"
+                  id="first-name"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500  "
+                ></input>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Arete del Padre
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="first-name"
+                  id="first-name"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500  "
+                ></input>
+              </div>
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Arete de la Madre
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="first-name"
+                  id="first-name"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500  "
+                ></input>
+
+<label className="block text-sm font-medium leading-6 text-gray-900">
             Fecha de Nacimiento
           </label>
           <div className="relative max-w-sm">
@@ -144,44 +191,16 @@ function NewRegister() {
               placeholder="Select date"
             ></input>
           </div>
+              </div>
+            </div>
+          )}
         </div>
 
-       
-
-        <div className="mt-2">
-        
-        {birthType === "natural" ? (
-          <div>
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Arete del Padre
-            </label>
-            <div className="mt-2">
-              <input
-                type="text"
-                name="first-name"
-                id="first-name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500  "
-              ></input>
-            </div>
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Arete de la Madre
-            </label>
-            <div className="mt-2">
-              <input
-                type="text"
-                name="first-name"
-                id="first-name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500  "
-              ></input>
-            </div>
-          </div>
-        ) : (
-          <p></p>
-        )}
-      </div>
-
         <br></br>
-        <button className="bg-green-500  hover:bg-blue-700 text-white font-bold py-2 px-4 border  rounded" onClick={() => handleButtonClick('/dashboard')}>
+        <button
+          className="bg-green-500  hover:bg-blue-700 text-white font-bold py-2 px-4 border  rounded"
+          onClick={() => handleButtonClick("/dashboard")}
+        >
           Enviar
         </button>
       </form>
